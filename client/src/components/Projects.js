@@ -5,7 +5,7 @@ const Projects = () => {
   const [projects, setProjects] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:4000/api/projects')
+    fetch('https://portfolio-2oih.onrender.com/api/projects')
       .then((res) => res.json())
       .then((data) => setProjects(data));
   }, []);
