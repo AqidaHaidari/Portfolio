@@ -18,7 +18,6 @@ An interactive and responsive portfolio showcasing my journey as a Full-Stack We
 - ✉️ **Contact Form**:
   - Integrated with **Nodemailer** to send emails.
   - **Slack Notifications** for real-time updates on form submissions.
-- 🌗 **Dark Mode**: User-selectable theme stored in `localStorage`.
 
 ---
 
