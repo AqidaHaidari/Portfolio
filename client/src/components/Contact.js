@@ -14,7 +14,8 @@ const Contact = () => {
     message: '',
   });
 
-  const [status, setStatus] = useState('');
+  const [status, setStatus] = useState({ message: '', isSuccess: false });
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -23,6 +24,9 @@ const Contact = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
+    setStatus({ message: '', isSuccess: false });
+
     try {
       const response = await fetch(
         'https://portfolio-2oih.onrender.com/api/contact',
@@ -38,14 +42,18 @@ const Contact = () => {
       const result = await response.json();
 
       if (response.ok) {
-        setStatus(result.message);
+        setStatus({ message: result.message, isSuccess: true });
         setFormData({ name: '', email: '', message: '' });
       } else {
         throw new Error(result.error || 'Something went wrong');
       }
     } catch (error) {
-      console.error('Error sending message:', error);
-      setStatus('Error sending message. Please try again.');
+      setStatus({
+        message: 'Error sending message. Please try again.',
+        isSuccess: false,
+      });
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -168,11 +176,18 @@ const Contact = () => {
             </div>
             <button
               type="submit"
-              className="w-full py-3 bg-purple-950 text-white font-semibold rounded-md shadow-lg hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-950"
+              className="w-full py-3 bg-purple-950 text-white font-semibold rounded-md shadow-lg hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-950 disabled:bg-gray-400 disabled:cursor-not-allowed"
+              disabled={loading}
             >
-              Send Message
+              {loading ? 'Sending...' : 'Send Message'}
             </button>
-            {status && <p className="mt-4 text-center">{status}</p>}
+            {status.message && (
+              <p
+                className={`mt-4 text-center font-medium ${status.isSuccess ? 'text-green-600' : 'text-red-600'}`}
+              >
+                {status.message}
+              </p>
+            )}
           </motion.form>
         </div>
       </div>
