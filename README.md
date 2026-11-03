@@ -1,11 +1,9 @@
 
 # Portfolio Website
 
-An interactive and responsive portfolio showcasing my journey as a Full-Stack Web Developer, featuring projects, skills, experiences, and a contact form with real-time integrations.
+An interactive and responsive portfolio showcasing my journey as a Full-Stack Web Developer, featuring projects, skills, experience and credentials.
 
-![Landing Page](https://res.cloudinary.com/dbfye7vqa/image/upload/v1734545157/Screenshot_2024-12-18_at_10.35.31_PM_sluuyz.png)
-
-<HeroSection />
+![Landing page of the portfolio: the name Aqida Haidari set large over a dark lapis background, beside a rotating eight-pointed girih star](docs/screenshot.png)
 
 ---
 
