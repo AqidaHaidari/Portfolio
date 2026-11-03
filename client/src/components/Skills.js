@@ -1,62 +1,44 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { CodeIcon } from '@heroicons/react/outline';
+import Section from './ui/Section';
+import { reveal } from './ui/reveal';
+import { skills } from '../data/content';
 
-const skills = [
-  { name: 'JavaScript (ES6+)', icon: '🟨' },
-  { name: 'React.js', icon: '⚛️' },
-  { name: 'Node.js', icon: '🟩' },
-  { name: 'Express.js', icon: '🚀' },
-  { name: 'Vue.js', icon: '🟩' },
-  { name: 'MongoDB', icon: '🍃' },
-  { name: 'PHP', icon: '🐘' },
-  { name: 'MySQL', icon: '🗄️' },
-  { name: 'HTML5 & CSS3', icon: '🌐' },
-  { name: 'Tailwind CSS', icon: '🎨' },
-  { name: 'Git & GitHub', icon: '🐙' },
-  { name: 'Shopify', icon: '🛒' },
-  { name: 'WordPress', icon: '📝' },
-  { name: 'Squarespace', icon: '🔳' },
-  { name: 'CodeIgniter', icon: '🔥' },
-  { name: 'Jest Testing Framework', icon: '🧪' },
-  { name: 'MDX', icon: '📖' },
-];
-
-const Skills = () => {
-  return (
-    <section id="skills" className="py-20 bg-gray-50">
-      <div className="container mx-auto text-center px-6 md:px-20">
+// Grouped the way the work is actually divided, not as one undifferentiated grid.
+const Skills = () => (
+  <Section
+    id="skills"
+    tone="light"
+    eyebrow="Toolkit"
+    title="What I build with"
+    standfirst="Grouped by where each tool sits in the stack, rather than ranked by how well I know it."
+  >
+    <dl className="divide-y divide-lapis/20 border-y border-lapis/20">
+      {skills.map((group, index) => (
         <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
+          key={group.group}
+          {...reveal(index * 0.06)}
+          className="grid grid-cols-1 gap-4 py-7 md:grid-cols-12 md:gap-8"
         >
-          <CodeIcon className="h-16 w-16 mx-auto text-purple-950" />
-          <h2 className="text-3xl font-bold mt-4">Technical Skills</h2>
-          <p className="mt-4 text-gray-600">
-            My toolkit includes modern technologies and frameworks for
-            developing scalable and dynamic applications.
-          </p>
+          <dt className="eyebrow pt-1 text-lapis md:col-span-4">
+            {group.group}
+          </dt>
+          <dd className="md:col-span-8">
+            <ul className="flex flex-wrap gap-x-6 gap-y-3">
+              {group.items.map((item) => (
+                <li
+                  key={item}
+                  className="font-display text-lg font-semibold tracking-tight text-ink"
+                >
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </dd>
         </motion.div>
-        <div className="mt-8 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">
-          {skills.map((skill, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: index * 0.1 }}
-              className="bg-white shadow-lg p-6 rounded-lg text-center"
-            >
-              <div className="text-4xl">{skill.icon}</div>
-              <h3 className="mt-4 text-lg font-semibold">{skill.name}</h3>
-            </motion.div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-};
+      ))}
+    </dl>
+  </Section>
+);
 
 export default Skills;

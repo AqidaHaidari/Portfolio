@@ -14,10 +14,9 @@ An interactive and responsive portfolio showcasing my journey as a Full-Stack We
 - 🚀 **Scalable Landing Page**: Includes dynamic sections like About, Skills, Projects, Experience, and Contact.
 - 📱 **Responsive Design**: Built with Tailwind CSS for seamless viewing across all devices.
 - 🎨 **Interactive Animations**: Powered by `framer-motion` for smooth transitions and engaging UI interactions.
-- 📂 **Dynamic Project Showcase**: Projects are loaded dynamically from MongoDB, showcasing titles, descriptions, tech stacks, and live/demo links.
-- ✉️ **Contact Form**:
-  - Integrated with **Nodemailer** to send emails.
-  - **Slack Notifications** for real-time updates on form submissions.
+- 📂 **Project Showcase**: Projects, experience, skills and credentials are all defined in `client/src/data/content.js` — edit that one file to update the site.
+- ✉️ **Contact**: Direct email, phone and social links. No backend dependency on the front end.
+- 🪟 **Visual identity**: Timurid tilework palette (lapis, turquoise, saffron) with an eight-pointed *girih* star as the recurring motif.
 
 ---
 
@@ -27,7 +26,7 @@ An interactive and responsive portfolio showcasing my journey as a Full-Stack We
 - **React**: Component-based framework for building a responsive and interactive UI.
 - **Tailwind CSS**: Utility-first CSS framework for custom, scalable styles.
 - **Framer Motion**: For smooth animations and transitions.
-- **Heroicons**: SVG-based icons for UI design.
+- **React Icons**: SVG-based icons for UI design.
 
 ### Backend
 - **Node.js**: Runtime for server-side JavaScript.

@@ -1,49 +1,72 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { BadgeCheckIcon } from '@heroicons/react/outline';
+import Section from './ui/Section';
+import { reveal } from './ui/reveal';
+import { certifications, education } from '../data/content';
 
-const certifications = [
-  { title: 'Cyber Security Essentials', year: '2024' },
-  { title: 'Quality Assurance (QA) Fundamentals', year: '2024' },
-  { title: 'Phishing Awareness and Prevention', year: '2024' },
-  { title: 'SOC 2 Compliance Fundamentals', year: '2024' },
-];
-
-const Certifications = () => {
-  return (
-    <section id="certifications" className="py-20 bg-white">
-      <div className="container mx-auto px-6 md:px-20 text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-        >
-          <BadgeCheckIcon className="h-16 w-16 mx-auto text-purple-950" />
-          <h2 className="text-3xl font-bold mt-4">Certifications & Training</h2>
-          <p className="mt-4 text-gray-600">
-            Verified credentials that demonstrate my commitment to excellence
-            and ongoing professional development.
-          </p>
-        </motion.div>
-        <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {certifications.map((cert, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: index * 0.1 }}
-              className="bg-gray-50 shadow-md p-6 rounded-lg text-center"
+// Certifications and education answer the same question, so they share a section.
+const Credentials = () => (
+  <Section
+    id="credentials"
+    tone="deep"
+    eyebrow="Credentials"
+    title="Training and education"
+  >
+    <div className="grid grid-cols-1 gap-16 lg:grid-cols-12 lg:gap-16">
+      <motion.div
+        {...reveal()}
+        className="lg:col-span-7"
+      >
+        <h3 className="eyebrow">Certifications</h3>
+        <ul className="mt-6 divide-y divide-lapis/40 border-y border-lapis/40">
+          {certifications.map((cert) => (
+            <li
+              key={cert.title}
+              className="flex items-baseline justify-between gap-6 py-4"
             >
-              <h3 className="text-lg font-semibold">{cert.title}</h3>
-              <p className="text-sm text-gray-500 mt-2">{cert.year}</p>
-            </motion.div>
+              <div>
+                <p className="text-glaze">{cert.title}</p>
+                {cert.issuer && (
+                  <p className="mt-1 text-sm text-muted">{cert.issuer}</p>
+                )}
+              </div>
+              <span className="shrink-0 font-mono text-xs text-tile">
+                {cert.year}
+              </span>
+            </li>
           ))}
-        </div>
-      </div>
-    </section>
-  );
-};
+        </ul>
+      </motion.div>
 
-export default Certifications;
+      <motion.div
+        {...reveal(0.12)}
+        className="lg:col-span-5"
+      >
+        <h3 className="eyebrow">Education</h3>
+        <ul className="mt-6 space-y-8">
+          {education.map((item) => (
+            <li
+              key={item.qualification}
+              className="border-l border-lapis pl-5"
+            >
+              <p className="font-mono text-xs uppercase tracking-[0.16em] text-tile">
+                {item.period}
+              </p>
+              <p className="mt-2 font-display text-xl font-bold tracking-tight text-glaze">
+                {item.qualification}
+              </p>
+              <p className="mt-1 text-muted">{item.school}</p>
+              {item.note && (
+                <p className="mt-3 text-sm leading-relaxed text-muted">
+                  {item.note}
+                </p>
+              )}
+            </li>
+          ))}
+        </ul>
+      </motion.div>
+    </div>
+  </Section>
+);
+
+export default Credentials;

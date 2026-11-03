@@ -1,97 +1,132 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Typewriter } from 'react-simple-typewriter';
+import { GirihStar, GirihMark } from './ui/Girih';
+import { profile, heroFacts } from '../data/content';
 
-const Hero = () => {
-  return (
-    <section
-      id="hero"
-      className="h-screen bg-gradient-to-br from-indigo-950 via-purple-900 to-pink-700
- relative flex items-center justify-center text-white overflow-hidden"
-    >
-      <div className="absolute inset-0 bg-hero-pattern pointer-events-none opacity-10" />
-
-      <div className="container mx-auto px-12 md:flex md:items-center md:justify-between z-10">
-        <motion.div
-          className="text-center md:text-left md:w-1/2"
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
-        >
-          <h1 className="text-6xl md:text-7xl font-extrabold font-primary">
-            Hi, I’m{' '}
-            <span className="text-yellow-400 drop-shadow-md">
-              Aqida Haidari
-            </span>
-          </h1>
-
-          <p className="mt-4 text-2xl md:text-3xl font-light font-secondary">
-            <span className="text-yellow-300">
-              <Typewriter
-                words={[
-                  'Creative Web Developer',
-                  'Innovative Problem Solver',
-                  'Design Enthusiast',
-                ]}
-                loop
-                cursor
-                cursorStyle="|"
-                typeSpeed={70}
-                deleteSpeed={50}
-                delaySpeed={1000}
-              />
-            </span>
-          </p>
-
-          <motion.a
-            href="/Aqida-Haidari.pdf"
-            download="Aqida_Haidari_Resume.pdf"
-            className="mt-8 inline-block px-8 py-4 bg-yellow-400 text-black font-semibold rounded-full shadow-lg hover:bg-yellow-500 hover:scale-110 transition-transform"
-            whileHover={{ scale: 1.1 }}
-            transition={{ type: 'spring', stiffness: 300 }}
-          >
-            Download My Resume
-          </motion.a>
-        </motion.div>
-
-        <motion.div
-          className="mt-12 md:mt-0 md:w-1/2 flex justify-center md:justify-end"
-          initial={{ y: -10 }}
-          animate={{ y: 10 }}
-          transition={{
-            repeat: Infinity,
-            repeatType: 'reverse',
-            duration: 2,
-            ease: 'easeInOut',
-          }}
-        >
-          <img
-            src="/profile2.svg"
-            alt="Aqida Haidari"
-            className="w-64 h-64 md:w-80 md:h-80   object-cover"
-          />
-        </motion.div>
-      </div>
-
-      <motion.div
-        className="absolute top-10 left-10 w-16 h-16 bg-yellow-300 rounded-full opacity-80"
-        animate={{ y: [0, -20, 0], x: [0, 20, 0] }}
-        transition={{ duration: 3, repeat: Infinity }}
-      />
-
-      <motion.div
-        className="absolute bottom-20 right-20 w-24 h-24 bg-pink-400 rounded-full opacity-50"
-        animate={{ x: [0, -30, 0], y: [0, 30, 0] }}
-        transition={{ duration: 4, repeat: Infinity }}
-      />
-
-      <motion.div
-        className="absolute top-1/2 right-1/3 w-8 h-8 bg-blue-300 rounded-full opacity-75"
-        animate={{ y: [-15, 15, -15] }}
-        transition={{ duration: 2.5, repeat: Infinity }}
-      />
-    </section>
-  );
+// Page-load sequence: the name arrives first, everything else follows it.
+const sequence = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.11, delayChildren: 0.15 } },
 };
+
+const step = {
+  hidden: { opacity: 0, y: 24 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.75, ease: [0.22, 1, 0.36, 1] },
+  },
+};
+
+const Hero = () => (
+  <section
+    id="top"
+    className="relative isolate flex min-h-screen flex-col justify-center overflow-hidden bg-ink pb-16 pt-32 sm:pt-36"
+  >
+    <div className="bg-lattice pointer-events-none absolute inset-0 opacity-50" />
+    <div className="pointer-events-none absolute -right-40 top-0 h-[42rem] w-[42rem] rounded-full bg-lapis/25 blur-[140px]" />
+    <div className="pointer-events-none absolute -left-32 bottom-0 h-[30rem] w-[30rem] rounded-full bg-tile/10 blur-[130px]" />
+
+    <div className="relative mx-auto grid w-full max-w-page grid-cols-1 gap-16 px-6 sm:px-10 lg:grid-cols-12 lg:items-center lg:gap-10">
+      <motion.div
+        variants={sequence}
+        initial="hidden"
+        animate="show"
+        className="lg:col-span-7"
+      >
+        <motion.p
+          variants={step}
+          className="eyebrow flex items-center gap-3"
+        >
+          <span className="relative flex h-1.5 w-1.5">
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-saffron opacity-70" />
+            <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-saffron" />
+          </span>
+          {profile.availability}
+        </motion.p>
+
+        <motion.h1
+          variants={step}
+          className="mt-7 font-display text-[clamp(3rem,11vw,7rem)] font-extrabold uppercase leading-[1] tracking-[-0.03em]"
+        >
+          <span className="block text-glaze">Aqida</span>
+          {/* Outlined to echo the hairline tile-cutting of the girih motif. */}
+          <span
+            className="block text-transparent"
+            style={{ WebkitTextStroke: '1.5px #E9A13B' }}
+          >
+            Haidari
+          </span>
+        </motion.h1>
+
+        <motion.p
+          variants={step}
+          className="mt-8 font-mono text-sm uppercase tracking-[0.18em] text-tile"
+        >
+          {profile.role}
+        </motion.p>
+
+        <motion.p
+          variants={step}
+          className="mt-5 max-w-xl text-lg leading-relaxed text-muted sm:text-xl"
+        >
+          {profile.pitch}
+        </motion.p>
+
+        <motion.div variants={step} className="mt-10 flex flex-wrap gap-4">
+          <a
+            href={profile.resume}
+            download={profile.resumeFilename}
+            className="rounded-full bg-saffron px-7 py-3.5 font-mono text-xs uppercase tracking-[0.16em] text-ink transition-colors hover:bg-glaze"
+          >
+            Download resume
+          </a>
+          <a
+            href="#contact"
+            className="rounded-full border border-lapis px-7 py-3.5 font-mono text-xs uppercase tracking-[0.16em] text-glaze transition-colors hover:border-tile hover:text-tile"
+          >
+            Get in touch
+          </a>
+        </motion.div>
+      </motion.div>
+
+      {/* The signature: layered khatam stars, turning against each other. */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.9 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 1.3, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+        className="relative mx-auto aspect-square w-full max-w-sm lg:col-span-5"
+        aria-hidden="true"
+      >
+        <GirihStar className="animate-spin-slow absolute inset-0 h-full w-full text-tile/35" />
+        <GirihStar className="animate-spin-slower absolute inset-[14%] text-saffron/45" />
+        <GirihStar className="absolute inset-[30%] text-glaze/25" />
+        <GirihMark className="animate-drift absolute left-1/2 top-1/2 h-4 w-4 -translate-x-1/2 -translate-y-1/2 text-saffron" />
+      </motion.div>
+    </div>
+
+    {/* Three facts, the way a spec sheet reads. */}
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ delay: 1, duration: 0.8 }}
+      className="relative mx-auto mt-20 w-full max-w-page px-6 sm:px-10"
+    >
+      <dl className="grid grid-cols-1 border-t border-lapis/50 sm:grid-cols-3 sm:divide-x sm:divide-lapis/50">
+        {heroFacts.map((fact) => (
+          <div
+            key={fact.label}
+            className="border-b border-lapis/50 py-6 sm:border-b-0 sm:px-6 sm:first:pl-0 sm:last:pr-0"
+          >
+            <dt className="eyebrow">{fact.label}</dt>
+            <dd className="mt-2 font-display text-lg font-semibold text-glaze">
+              {fact.value}
+            </dd>
+          </div>
+        ))}
+      </dl>
+    </motion.div>
+  </section>
+);
 
 export default Hero;

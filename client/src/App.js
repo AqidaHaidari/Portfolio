@@ -1,41 +1,34 @@
 import React from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
-import Projects from './components/Projects';
 import About from './components/About';
-import Contact from './components/Contact';
-import { Element } from 'react-scroll';
-import Skills from './components/Skills';
-import Certifications from './components/Certifications';
+import Projects from './components/Projects';
 import Experience from './components/Experience';
+import Skills from './components/Skills';
+import Credentials from './components/Certifications';
+import Contact from './components/Contact';
+import Footer from './components/Footer';
 
-function App() {
-  return (
-    <div className="App">
-      <Navbar />
-      <Element name="hero">
-        <Hero />
-      </Element>
-      <Element name="about">
-        <About />
-      </Element>
-      <Element name="projects">
-        <Projects />
-      </Element>
-      <Element name="skills">
-        <Skills />
-      </Element>
-      <Element name="certifications">
-        <Certifications />
-      </Element>
-      <Element name="experience">
-        <Experience />
-      </Element>
-      <Element name="contact">
-        <Contact />
-      </Element>
-    </div>
-  );
-}
+const App = () => (
+  <>
+    <a
+      href="#top"
+      className="sr-only focus:not-sr-only focus:fixed focus:left-6 focus:top-6 focus:z-[60] focus:rounded-full focus:bg-saffron focus:px-5 focus:py-2.5 focus:font-mono focus:text-xs focus:uppercase focus:tracking-[0.16em] focus:text-ink"
+    >
+      Skip to content
+    </a>
+    <Navbar />
+    <main>
+      <Hero />
+      <About />
+      <Projects />
+      <Experience />
+      <Skills />
+      <Credentials />
+      <Contact />
+    </main>
+    <Footer />
+  </>
+);
 
 export default App;
